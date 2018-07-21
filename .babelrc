@@ -3,9 +3,9 @@
 */
 {
     "presets":[
-        "env", "react"
+        "env", "react", "stage-2"
     ],
     "plugins": [
-    ["transform-class-properties", { "spec": true }]
+    ["transform-class-properties", "transform-object-rest-spread" ]
   ]
 }
