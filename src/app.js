@@ -11,9 +11,9 @@ import './styles/styles.scss';
 
 const store = configureStore();
 
-store.dispatch(addExpense({ description: 'rent'}))
-store.dispatch(addExpense({ description: 'bill'}))
-store.dispatch(addExpense({ description: 'raul'}))
+store.dispatch(addExpense({ description: 'rent', amount: 100, createdAt: 1000}))
+//store.dispatch(addExpense({ description: 'bill', amount: 200, createdAt: 2000}))
+//store.dispatch(addExpense({ description: 'raul', amount: 300, createdAt: 3000}))
 
 console.log(store.getState());
 
