@@ -4,8 +4,6 @@ import { startLogin } from '../actions/auth';
 
 export const LoginPage = ({startLogin}) => (
     <div>
-        <input type="email"></input>
-        <input type="password"></input>
         <button
             onClick={startLogin}
         >Login</button>
