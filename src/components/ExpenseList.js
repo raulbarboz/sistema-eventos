@@ -6,7 +6,7 @@ import selectExpenses from '../selectors/expenses';
 
 
 const ExpenseList = (props) => (
-  <div>
+  <div className="content-container">
     <h1>Expense List</h1>
 
     {props.expenses.map((expense) => {

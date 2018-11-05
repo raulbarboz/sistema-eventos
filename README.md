@@ -1,4 +1,7 @@
-# react-blank
+# expensify-app
+```
+https://react-cost-expensify.herokuapp.com/
+``
 
 ## install
 
