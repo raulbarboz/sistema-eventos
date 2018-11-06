@@ -12,3 +12,9 @@
 .button--link{
   background:none;
 }
+
+
+.btn-remove{
+  @extend .button;
+  background:gray;
+}
