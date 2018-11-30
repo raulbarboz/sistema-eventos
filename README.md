@@ -1,7 +1,4 @@
-# expensify-app
-```
-https://react-cost-expensify.herokuapp.com/
-``
+# sistema-eventos
 
 ## install
 
