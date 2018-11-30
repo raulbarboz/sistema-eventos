@@ -1,0 +1,39 @@
+.home-layout{
+  align-items:center;
+  background: url('/images/bg.jpg');
+  background-size:cover;
+  display: flex;
+  justify-content: center;
+  height: 100vh;
+  width:100vw;
+  z-index:-1;
+  position: absolute;
+  top:0;
+  left:0;
+  line-height: 1.7;
+}
+
+.box-layout__box{
+  background: fade-out(black, .30);
+  border-radius:5px;
+  text-align:center;
+  width:50rem;
+  padding:$l-size $m-size;
+}
+
+.title{
+  color: #00d657;
+  text-transform: uppercase;
+}
+
+.box-layout__title{
+  margin: 0 0 $m-size 0;
+  color:white;
+}
+
+.box-layout__text{
+  margin: 0 0 $m-size 0;
+  color:white;
+}
+
+

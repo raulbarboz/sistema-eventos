@@ -18,7 +18,18 @@ module.exports = (env) => {
         loader: 'babel-loader',
         test: /\.js$/,
         exclude: /node_modules/
-      }, {
+      }, 
+      {
+                test: /\.(woff(2)?|ttf|eot|svg|otf)(\?v=\d+\.\d+\.\d+)?$/,
+                use: [{
+                    loader: 'file-loader',
+                    options: {
+                        name: '[name].[ext]',
+                        outputPath: 'fonts/'
+                    }
+                }]
+      },
+      {
         test: /\.s?css$/,
         use: CSSExtract.extract({
           use: [

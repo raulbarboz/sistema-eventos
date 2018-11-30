@@ -1,16 +1,19 @@
+
 .button{
-  background: $blue;
-  color:white;
-  border: none;
-  display: inline-block;
-  padding: $s-size;
-  font-weith:300;
-  font-size: 1.8rem;
+  font-family:'HansKendrickHeavy', sans-serif;
+  background: #1ba91c;
+  box-shadow: #086707 5px 5px;
+  font-style: normal;
+  margin-right: 5px;
+  padding: 3px 10px;
+  text-shadow: none;
+  margin-left: -8px;
   text-decoration:none;
+  border: none;
+  color:white;
 }
 
 .button--link{
-  background:none;
 }
 
 

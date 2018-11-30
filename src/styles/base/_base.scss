@@ -8,8 +8,9 @@ html {
 
 body{
   color: $dark-grey;
-  font-family: Helvetica, Arial, sans-serif;
-  font-size: $m-size;
+  font-family: 'HansKendrick', sans-serif;
+  font-size: $l-size;
+  overflow-x:hidden;
 }
 
 button{
@@ -22,4 +23,15 @@ button:disabled{
 
 .is-active{
   font-weight:bold;
+}
+
+em{
+   font-style: normal;
+   /* font-weight: bold; */
+   color: #795548;
+   background: #fbe119;
+   margin-right: 5px;
+   padding: 3px 10px;
+   box-shadow: #eab20e 5px 5px;
+   text-shadow: none; 
 }

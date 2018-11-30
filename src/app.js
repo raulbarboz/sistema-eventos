@@ -6,6 +6,7 @@ import configureStore from './store/configureStore';
 import { startSetExpenses } from './actions/expenses';
 import { login, logout } from './actions/auth';
 import getVisibleExpenses from './selectors/expenses';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import 'normalize.css/normalize.css';
 import './styles/styles.scss';
 import { firebase } from './firebase/firebase';
