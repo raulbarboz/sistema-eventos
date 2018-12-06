@@ -17,26 +17,3 @@ const googleAuthProvider = new firebase.auth.GoogleAuthProvider();
 
 export { firebase, googleAuthProvider, storage, database as default };
 
-
-// database.ref('expenses').on('value', (dataSnapshot) => {
-//     const expenses = [];
-//     dataSnapshot.forEach((childSnapshot) => {
-//       expenses.push({
-//         id: childSnapshot.key,
-//         ...childSnapshot.val()
-//       })
-//     })
-//     console.log(expenses);
-//   })
-
-
-// database.ref('expenses').push({
-//   description: 'suco',
-//   note: 'suco laranja',
-//   amount: 600,
-//   createdAt: 976123498740
-// })
-
-// firebase.database().ref('expenses').set({
-//   name: 'Raul Barboza'
-// })

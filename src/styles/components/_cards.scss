@@ -1,0 +1,30 @@
+.card{
+    min-height:550px;
+}
+.close{
+    position:absolute;
+    right:7px;
+    color:#ff0000;
+    opacity:1;
+}
+.card-title{
+    font-size:$m-size;
+    font-family: 'HansKendrickHeavy', sans-serif;
+    min-height:40px;
+}
+.card-subtitle{
+    font-size:$s-size;
+    font-family: 'HansKendrickHeavy', sans-serif;
+    margin: 10px 0 10px 0;
+    padding: 5px 0 5px 0;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    text-align:center;
+}
+.card-text{
+    font-size:$s-size;
+    text-align:justify;
+}
+.card-footer{
+    font-size:$s-size;
+}

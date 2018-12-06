@@ -3,9 +3,9 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import AppRouter, { history } from './routers/AppRouter';
 import configureStore from './store/configureStore';
-import { startSetExpenses } from './actions/expenses';
+import { startSetEvents } from './actions/events';
 import { login, logout } from './actions/auth';
-import getVisibleExpenses from './selectors/expenses';
+import getVisibleEvents from './selectors/events';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'normalize.css/normalize.css';
 import './styles/styles.scss';
@@ -31,7 +31,7 @@ ReactDOM.render(<p>Loading....</p>, document.getElementById('app'));
 firebase.auth().onAuthStateChanged((user) => {
   if(user){
     store.dispatch(login(user.uid));
-    store.dispatch(startSetExpenses()).then(() => {
+    store.dispatch(startSetEvents()).then(() => {
     renderApp();
       if (history.location.pathname === '/') {
         history.push('/dashboard')

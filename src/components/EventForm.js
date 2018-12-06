@@ -7,15 +7,17 @@ import 'react-dates/lib/css/_datepicker.css';
 const now = moment();
 now.format('MMM Do, YYYY');
 
-export default class ExpenseForm extends React.Component {
+export default class EventForm extends React.Component {
   constructor(props){
     super(props)
     this.state = {
-        event: props.expense ? props.expense.event : '',
-        subtitle: props.expense ? props.expense.subtitle : '',
-        description: props.expense ? props.expense.description : '',
-        createdAt: props.expense ? moment(props.expense.createdAt) : moment(),
+        event: props.event ? props.event.event : '',
+        subtitle: props.event ? props.event.subtitle : '',
+        description: props.event ? props.event.description : '',
+        createdAt: props.event ? moment(props.event.createdAt) : moment(),
         calendarFocused: false,
+        url: null,
+        imageName: null,
         error: ''
     }
   }
@@ -51,6 +53,8 @@ export default class ExpenseForm extends React.Component {
                 event: this.state.event,
                 subtitle: this.state.subtitle,
                 createdAt: this.state.createdAt.valueOf(),
+                url: this.state.url,
+                imageName: this.state.imageName,
                 description: this.state.description
             })
         }
@@ -59,7 +63,8 @@ export default class ExpenseForm extends React.Component {
         return (
                 <form className="form" onSubmit={this.onSubmit}>
                 { this.state.error && <p className="form__error">{this.state.error}</p>}
-                    <ImageUpload />
+                { this.state.url ? <img className="form__image" src={this.state.url} /> : <ImageUpload receiveUrl={(url, imageName) => { this.setState({url, imageName}) } } />}
+                    
                     <input
                     type="text"
                     placeholder="Evento"

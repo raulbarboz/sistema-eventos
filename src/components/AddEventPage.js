@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import EventForm from './EventForm';
-import { startAddExpense } from '../actions/expenses';
+import { startAddEvent } from '../actions/events';
 
 const AddEventPage = (props) => (
   <div>
@@ -12,8 +12,8 @@ const AddEventPage = (props) => (
     </div>
     <div className="content-container">
     <EventForm
-      onSubmit={(expense) => {
-        props.dispatch(startAddExpense(expense));
+      onSubmit={(event) => {
+        props.dispatch(startAddEvent(event));
         props.history.push('/');
       }}
     />

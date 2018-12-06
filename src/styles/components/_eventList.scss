@@ -1,0 +1,25 @@
+.list-header{
+    background: #f7f7f7;
+    border: 1px solid darken(#f7f7f7, 7%);
+    color:gray;
+    display:flex;
+    justify-content: space-between;
+    padding: $s-size $m-size;
+}
+.list-item{
+    width:32%;
+    display:block;
+    float:left;
+    margin-top:10px;
+    text-decoration:none;
+    color:$dark-grey;
+    &:hover{
+        text-decoration:none;
+        color:$dark-grey;
+    }
+}
+
+.margin-right{
+    margin-right:2%;
+}
+

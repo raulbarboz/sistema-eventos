@@ -1,9 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import ExpenseForm from './_ExpenseForm';
-import { startEditExpense, startRemoveExpense } from '../actions/expenses'
+import { startEditEvent, startRemoveEvent } from '../actions/events'
 
-const EditExpensePage = (props) => {
+const EditEventPage = (props) => {
   return(
     <div>
       <div className="page-header">
@@ -13,9 +13,9 @@ const EditExpensePage = (props) => {
         </div>
       <div className="content-container">
           <ExpenseForm
-            expense={props.expense}
-            onSubmit={(expense) => {
-              props.dispatch(startEditExpense(props.expense.id, expense)).then(() => {
+            expense={props.event}
+            onSubmit={(event) => {
+              props.dispatch(startEditEvent(props.event.id, event)).then(() => {
                 props.history.push('/');
               })
               
@@ -24,7 +24,7 @@ const EditExpensePage = (props) => {
         <button
             className="button btn-remove"
             onClick={() => {
-              props.dispatch(startRemoveExpense({id: props.expense.id})).then(()=>{ props.history.push('/') })
+              props.dispatch(startRemoveEvent({id: props.event.id})).then(()=>{ props.history.push('/') })
     
             }}
             >
@@ -37,8 +37,8 @@ const EditExpensePage = (props) => {
 
 const mapStateToProps = (state, props) => {
   return {
-    expense: state.expenses.find((expense) => expense.id === props.match.params.id)
+    event: state.events.find((event) => event.id === props.match.params.id)
   }
 }
 
-export default connect(mapStateToProps)(EditExpensePage);
+export default connect(mapStateToProps)(EditEventPage);
