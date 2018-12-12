@@ -1,32 +1,58 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Card, CardTitle, CardText, CardImg, CardImgOverlay } from 'reactstrap';
+import CardOpenEventPage from './CardOpenEventPage';
+import CardEditEventPage from './CardEditEventPage';
+import CardAddStuff from './CardAddStuff';
+import { IoMdCheckbox, IoMdCreate } from "react-icons/io";
+import { startEditEvent } from '../actions/events'
 
-const OpenEventPage = (props) => {
-  return(
+class OpenEventPage extends React.Component {
+  constructor(props) {
+    super(props)
+    
+    this.state = {
+      toggle: false
+    }
+  }
+  
+  toggleEdit = () => {
+    this.setState({
+      toggle: !this.state.toggle
+    })
+  }
+  render(){
+    return(
     <div>
       <div className="page-header">
-          <div className="content-container">
-            <Card inverse>
-              <CardImg width="100%" src={props.event.url} alt="Card image cap" />
-              <CardImgOverlay>
-                <CardTitle>{props.event.event}</CardTitle>
-                <CardText>{props.event.subtitle}</CardText>
-                <CardText>{props.event.description}</CardText>
-                <CardText>
-                  <small className="text-muted">{props.event.createdAt}</small>
-                </CardText>
-              </CardImgOverlay>
-            </Card>
+          <div className="content-container position-relative">
+          <button 
+            onClick={this.toggleEdit}
+            className="button-toggleEdit"
+          >
+            {this.state.toggle ? <IoMdCheckbox /> : <IoMdCreate />}
+          </button>
+          {
+            this.state.toggle ? 
+            <CardEditEventPage 
+            onSubmitChange={
+              (editEvent, props) => {  
+               this.props.dispatch(startEditEvent(this.props.event.id, editEvent))
+              } 
+            }
+            {...this.props} /> : 
+            <CardOpenEventPage {...this.props} />
+          }
           </div>
-        </div>
+      </div>
       <div className="content-container">
-
+        <CardAddStuff />
       </div>
     </div>
 
   )
+  }
 }
+
 
 const mapStateToProps = (state, props) => {
   return {

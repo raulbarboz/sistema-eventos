@@ -16,6 +16,24 @@
 .button--link{
 }
 
+.button-toggleEdit{
+  border: none;
+  background: none;
+  position: absolute;
+  right: 20px;
+  top: 7px;
+  z-index: 1;
+  color:red;
+}
+.button-removeImage{
+  border: none;
+  background: none;
+  position: absolute;
+  right: 40px;
+  top: 5px;
+  z-index: 1;
+  color:red;
+}
 
 .btn-remove{
   @extend .button;

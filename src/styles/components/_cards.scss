@@ -1,5 +1,5 @@
 .card{
-    min-height:550px;
+    min-height:500px;
 }
 .close{
     position:absolute;
@@ -27,4 +27,20 @@
 }
 .card-footer{
     font-size:$s-size;
+}
+.card-edit__input{
+    width:100%;
+    border:none;
+    &:focus{
+        outline:none;
+        color:#545454;
+    }
+}
+.card-edit__textarea{
+    width:100%;
+    min-height:300px;
+    &:focus{
+        outline:none;
+        color:#545454;
+    }
 }
