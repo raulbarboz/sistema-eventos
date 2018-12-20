@@ -27,33 +27,6 @@ export const startAddEvent = (eventData = {}) => {
   }
 }
 
-// ADD_STUFF
-export const addStuff = (stuff) => ({
-    type: 'ADD_Stuff',
-    stuff
-})
-
-export const startAddStuff = (id, stuffData = {}) => {
-  return (dispatch, getState) => {
-    const uid = getState().auth.uid;
-    const eventId = id;
-    const {
-      stuff = '',
-      subtitle = '',
-      description = '',
-      url = '',
-      imageName
-    } = stuffData;
-    const stuffObj = { stuff, subtitle, description, url, imageName }
-    database.ref(`users/${uid}/events/${eventId}/stuffs`).push(stuffObj).then((ref) => {
-      dispatch(addStuff({
-        id: ref.key,
-        ...stuffObj
-      }))
-    })
-  }
-}
-
 // REMOVE_EVENT
 export const removeEvent = ({ id = '' } = {}) => ({
     type: 'REMOVE_EVENT',
@@ -114,3 +87,4 @@ export const startSetEvents = () => {
     })
   }
 };
+

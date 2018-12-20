@@ -3,15 +3,24 @@ import { connect } from 'react-redux';
 import CardOpenEventPage from './CardOpenEventPage';
 import CardEditEventPage from './CardEditEventPage';
 import CardAddStuff from './CardAddStuff';
+import CardStuffItem from './CardStuffItem';
 import { IoMdCheckbox, IoMdCreate } from "react-icons/io";
-import { startEditEvent } from '../actions/events'
+import { startEditEvent } from '../actions/events';
+import { startAddStuff, startSetStuffs, startRemoveStuff } from '../actions/stuffs';
 
 class OpenEventPage extends React.Component {
   constructor(props) {
     super(props)
     
     this.state = {
-      toggle: false
+      toggle: false,
+      stuff:{
+        stuff: 'Título',
+        subtitle: 'Subtítulo',
+        description: 'Descrição',
+        url: 'none',
+        imageName: 'none'
+      }
     }
   }
   
@@ -19,6 +28,11 @@ class OpenEventPage extends React.Component {
     this.setState({
       toggle: !this.state.toggle
     })
+  }
+  
+  removeStuff = (id) => {
+    this.props.dispatch(startRemoveStuff(id, this.props.event.id))
+    console.log('gol')
   }
   render(){
     return(
@@ -45,10 +59,21 @@ class OpenEventPage extends React.Component {
           </div>
       </div>
       <div className="content-container">
-        <CardAddStuff />
+        {this.props.stuffs.map((stuff, index) => {
+          if((index + 1) % 3){
+          return <CardStuffItem  onRemoveStuff={this.removeStuff} key={index} {...stuff} styleClass="list-item margin-right" />
+          }else{
+          return <CardStuffItem  onRemoveStuff={this.removeStuff} key={index} {...stuff} styleClass="list-item"/>
+          }
+        })
+      }
+       <CardAddStuff 
+        AddStuff={(props) => {
+          this.props.dispatch(startAddStuff(this.props.event.id, this.state.stuff))
+        }}
+        />
       </div>
-    </div>
-
+      </div>
   )
   }
 }
@@ -56,7 +81,8 @@ class OpenEventPage extends React.Component {
 
 const mapStateToProps = (state, props) => {
   return {
-    event: state.events.find((event) => event.id === props.match.params.id)
+    event: state.events.find((event) => event.id === props.match.params.id),
+    stuffs: state.stuffs.filter((stuff) => stuff.parent_id === props.match.params.id )
   }
 }
 

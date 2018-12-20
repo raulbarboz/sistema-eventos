@@ -4,6 +4,7 @@ import { Provider } from 'react-redux';
 import AppRouter, { history } from './routers/AppRouter';
 import configureStore from './store/configureStore';
 import { startSetEvents } from './actions/events';
+import { startSetStuffs } from './actions/stuffs';
 import { login, logout } from './actions/auth';
 import getVisibleEvents from './selectors/events';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -31,6 +32,7 @@ ReactDOM.render(<p>Loading....</p>, document.getElementById('app'));
 firebase.auth().onAuthStateChanged((user) => {
   if(user){
     store.dispatch(login(user.uid));
+    store.dispatch(startSetStuffs())
     store.dispatch(startSetEvents()).then(() => {
     renderApp();
       if (history.location.pathname === '/') {
