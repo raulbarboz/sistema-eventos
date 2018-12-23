@@ -55,16 +55,14 @@ export const startSetStuffs = () => {
 
 // REMOVE_STUFF
 
-export const removeStuff = ({ id = '' }) => ({
+export const removeStuff = ({ id = '' } = {}) => ({
   type: 'REMOVE_STUFF',
   id
 })
 
-export const startRemoveStuff = ({ id = '', eventId = '' }) => {
+export const startRemoveStuff = (id, eventId = {}) => {
   return (dispatch, getState) => {
     const uid = getState().auth.uid;
-    const id = id;
-    const eventId = eventId;
     return database.ref(`users/${uid}/stuffs/${eventId}/${id}`).remove().then(() => {
      dispatch(removeStuff({id}))
    })

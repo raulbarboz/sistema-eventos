@@ -6,7 +6,7 @@ import CardAddStuff from './CardAddStuff';
 import CardStuffItem from './CardStuffItem';
 import { IoMdCheckbox, IoMdCreate } from "react-icons/io";
 import { startEditEvent } from '../actions/events';
-import { startAddStuff, startSetStuffs, startRemoveStuff } from '../actions/stuffs';
+import { startAddStuff, startRemoveStuff } from '../actions/stuffs';
 
 class OpenEventPage extends React.Component {
   constructor(props) {
@@ -30,10 +30,11 @@ class OpenEventPage extends React.Component {
     })
   }
   
-  removeStuff = (id) => {
-    this.props.dispatch(startRemoveStuff(id, this.props.event.id))
-    console.log('gol')
+  removeStuff = (data, eventId) => {
+    const id = data;
+    this.props.dispatch(startRemoveStuff(id, eventId));
   }
+  
   render(){
     return(
     <div>

@@ -6,9 +6,9 @@ export default(state = stuffsReducerDefaultState, action) => {
   switch(action.type) {
     case 'ADD_STUFF':
         return [...state, action.stuff]
-    case 'REMOVE_STUFFS':
+    case 'REMOVE_STUFF':
         return state.filter(({id}) => id !== action.id )
-    case 'EDIT_STUFFS':
+    case 'EDIT_STUFF':
         return state.map((stuff) => {
           if (stuff.id === action.id) {
             return {

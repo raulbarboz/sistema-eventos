@@ -2,6 +2,9 @@ import React from 'react';
 import { Card, CardImg, CardText, CardBody, CardTitle, CardSubtitle, Button } from 'reactstrap';
 
 const CardStuffItem = (props) => {
+  const deleteStuff = () => {
+    props.onRemoveStuff(props.id, props.parent_id)
+  }
   return (
     <div>
       <Card className="list-item">
@@ -10,7 +13,7 @@ const CardStuffItem = (props) => {
           <CardTitle>{props.stuff}</CardTitle>
           <CardSubtitle>{props.subtitle}</CardSubtitle>
           <CardText>{props.description}</CardText>
-          <Button onClick={props.onRemoveStuff(props.id)}>-</Button>
+          <Button onClick={deleteStuff}>-</Button>
         </CardBody>
       </Card>
     </div>
