@@ -35,7 +35,8 @@ const EventList = (props) => {
 
 const mapStateToProps = (state, props) => {
   return{
-    events:selectEvents(state.events, state.filters)
+   // events:selectEvents(state.events, state.filters)
+    events:state.events
   }
 }
 
