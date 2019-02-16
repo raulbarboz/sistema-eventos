@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, CardImg, CardText, CardBody, CardTitle, CardSubtitle, Button } from 'reactstrap';
+import { Card, CardImg, CardText, CardBody, CardTitle, CardSubtitle, Button, Table } from 'reactstrap';
 
 const CardStuffItem = (props) => {
   const deleteStuff = () => {
@@ -16,6 +16,33 @@ const CardStuffItem = (props) => {
           <Button onClick={deleteStuff}>-</Button>
         </CardBody>
       </Card>
+      
+      <Table striped>
+        <thead>
+          <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Username</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Mark</td>
+            <td>Otto</td>
+            <td>@mdo</td>
+          </tr>
+          <tr>
+            <td>Jacob</td>
+            <td>Thornton</td>
+            <td>@fat</td>
+          </tr>
+          <tr>
+            <td>Larry</td>
+            <td>the Bird</td>
+            <td>@twitter</td>
+          </tr>
+        </tbody>
+      </Table>
     </div>
   );
 };

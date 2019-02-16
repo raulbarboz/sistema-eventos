@@ -1,7 +1,7 @@
 import React from 'react';
 import moment from 'moment';
 import ImageUpload from './ImageUpload';
-import { SingleDatePicker } from 'react-dates';
+import { SingleDatePicker, DateRangePicker } from 'react-dates';
 import 'react-dates/lib/css/_datepicker.css';
 
 const now = moment();
@@ -18,7 +18,9 @@ export default class EventForm extends React.Component {
         calendarFocused: false,
         url: null,
         imageName: null,
-        error: ''
+        error: '',
+        startDate: props.event ? moment(props.event.createdAt) : moment(),
+        endDate: props.event ? moment(props.event.createdAt) : moment()
     }
   }
     onEventChange = (e) => {
@@ -52,7 +54,8 @@ export default class EventForm extends React.Component {
             this.props.onSubmit({
                 event: this.state.event,
                 subtitle: this.state.subtitle,
-                createdAt: this.state.createdAt.valueOf(),
+                startDate: this.state.startDate.valueOf(),
+                endDate: this.state.endDate.valueOf(),
                 url: this.state.url,
                 imageName: this.state.imageName,
                 description: this.state.description
@@ -81,13 +84,12 @@ export default class EventForm extends React.Component {
                     value={this.state.subtitle}
                     onChange={this.onSubtitleChange}
                     />
-                    <SingleDatePicker
-                    date={this.state.createdAt}
-                    onDateChange={this.onDateChange}
-                    focused={this.state.calendarFocused}
-                    onFocusChange={this.onFocusChange}
-                    numberOfMonths={1}
-                    isOutsideRange={() => false}
+                    <DateRangePicker
+                      startDate={this.state.startDate} // momentPropTypes.momentObj or null,
+                      endDate={this.state.endDate} // momentPropTypes.momentObj or null,
+                      onDatesChange={({ startDate, endDate }) => this.setState({ startDate, endDate })} // PropTypes.func.isRequired,
+                      focusedInput={this.state.focusedInput} // PropTypes.oneOf([START_DATE, END_DATE]) or null,
+                      onFocusChange={focusedInput => this.setState({ focusedInput })} // PropTypes.func.isRequired,
                     />
                     <textarea
                     placeholder="Descricão do Evento"

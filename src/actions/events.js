@@ -15,9 +15,10 @@ export const startAddEvent = (eventData = {}) => {
       description = '',
       url = '',
       imageName,
-      createdAt = 0
+      startDate = 0,
+      endDate = 0
     } = eventData;
-    const eventObj = { event, subtitle, description, url, imageName, createdAt }
+    const eventObj = { event, subtitle, description, url, imageName, startDate, endDate }
     database.ref(`users/${uid}/events`).push(eventObj).then((ref) => {
       dispatch(addEvent({
         id: ref.key,

@@ -20,7 +20,7 @@ const EventListItem = (props) => {
             <CardSubtitle>{textFilter(props.subtitle, 30)}</CardSubtitle>
             <CardText>{textFilter(props.description, 400)}</CardText>
           </CardBody>
-          <CardFooter>{moment(props.createdAt).format("MM/DD/YYYY")}</CardFooter>
+          <CardFooter>{moment(props.startDate).format("MM/DD/YYYY")} → {moment(props.endDate).format("MM/DD/YYYY")}</CardFooter>
         </Card>
     </Link>
   )

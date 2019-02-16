@@ -15,7 +15,7 @@ const CardOpenEventPage = (props) => {
           <CardSubtitle>{props.event.subtitle}</CardSubtitle>
           <CardText>{props.event.description}</CardText>
           <CardText>
-              <small className="text-muted">{moment(props.event.createdAt).format("MM/DD/YYYY")}</small>
+              <small className="text-muted">{moment(props.event.startDate).format("MM/DD/YYYY")} / {moment(props.event.endDate).format("MM/DD/YYYY")}</small>
           </CardText>
         </CardBody>
       </Card>
