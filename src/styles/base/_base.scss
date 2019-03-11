@@ -38,3 +38,42 @@ em{
 .position-relative{
     position:relative;
 }
+
+
+.button{
+  font-family:'HansKendrickHeavy', sans-serif;
+  background: #1ba91c;
+  box-shadow: #086707 5px 5px;
+  font-style: normal;
+  margin-right: 5px;
+  padding: 3px 10px;
+  text-shadow: none;
+  margin-left: -8px;
+  text-decoration:none;
+  border: none;
+  color:white;
+}
+
+.button-toggleEdit{
+  border: none;
+  background: none;
+  position: absolute;
+  right: 20px;
+  top: 7px;
+  z-index: 1;
+  color:red;
+}
+.button-removeImage{
+  border: none;
+  background: none;
+  position: absolute;
+  right: 40px;
+  top: 5px;
+  z-index: 1;
+  color:red;
+}
+
+.btn-remove{
+  @extend .button;
+  background:gray;
+}
