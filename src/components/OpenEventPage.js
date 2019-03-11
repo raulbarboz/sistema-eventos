@@ -7,6 +7,7 @@ import CardStuffItem from './CardStuffItem';
 import { IoMdCheckbox, IoMdCreate } from "react-icons/io";
 import { startEditEvent } from '../actions/events';
 import { startAddStuff, startRemoveStuff } from '../actions/stuffs';
+import { Table } from 'reactstrap';
 
 class OpenEventPage extends React.Component {
   constructor(props) {
@@ -18,6 +19,7 @@ class OpenEventPage extends React.Component {
         stuff: 'Título',
         subtitle: 'Subtítulo',
         description: 'Descrição',
+        price: '0',
         url: 'none',
         imageName: 'none'
       }
@@ -60,16 +62,26 @@ class OpenEventPage extends React.Component {
           </div>
       </div>
       <div className="content-container">
-        {this.props.stuffs.map((stuff, index) => {
-          if((index + 1) % 3){
-          return <CardStuffItem  onRemoveStuff={this.removeStuff} key={index} {...stuff} styleClass="list-item margin-right" />
-          }else{
-          return <CardStuffItem  onRemoveStuff={this.removeStuff} key={index} {...stuff} styleClass="list-item"/>
+      <Table striped>
+        <thead>
+          <tr>
+            <th>Título</th>
+            <th>Subtítulo</th>
+            <th>Descrição</th>
+            <th>Preço</th>
+            <th>Ação</th>
+          </tr>
+        </thead>
+        <tbody>
+          {this.props.stuffs.map((stuff, index) => {
+              return <CardStuffItem  onRemoveStuff={this.removeStuff} key={index} {...stuff} styleClass="list-item"/>
+            })
           }
-        })
-      }
+        </tbody>
+      </Table>
        <CardAddStuff 
         AddStuff={(props) => {
+          console.log(props)
           this.props.dispatch(startAddStuff(this.props.event.id, this.state.stuff))
         }}
         />
