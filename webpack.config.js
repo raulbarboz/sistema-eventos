@@ -1,11 +1,12 @@
 const path = require('path');
 const webpack = require('webpack');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+//const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 require('dotenv').config({path: '.env'})
 
 module.exports = (env) => {
   const isProduction = env === 'production';
-  const CSSExtract = new ExtractTextPlugin('styles.css');
+  //const CSSExtract = new ExtractTextPlugin('styles.css');
 
   return{
     entry: './src/app.js',
@@ -30,27 +31,23 @@ module.exports = (env) => {
                 }]
       },
       {
-        test: /\.s?css$/,
-        use: CSSExtract.extract({
-          use: [
-            {
-              loader: 'css-loader',
-              options: {
-                sourceMap: true
-              }
-            },
-            {
-              loader: 'sass-loader',
-              options: {
-                sourceMap: true
-              }
-            }
-          ]
-        })
+        test: /\.css$/,
+        use:  [  'style-loader', MiniCssExtractPlugin.loader, 'css-loader']
+      },
+      {
+        test: /\.scss$/,
+        use: [
+          "style-loader",
+          MiniCssExtractPlugin.loader,
+          "css-loader",
+          "sass-loader"
+        ]
       }]
     },
     plugins: [
-      CSSExtract,
+      new MiniCssExtractPlugin({
+            filename: "styles.css"
+        }),
       new webpack.DefinePlugin({
         'process.env.API_KEY': JSON.stringify(process.env.API_KEY),
         'process.env.AUTH_DOMAIN': JSON.stringify(process.env.AUTH_DOMAIN),
