@@ -8,15 +8,25 @@ import 'cropperjs/dist/cropper.css';
             super(props);
             this.state = { 
                 image: null,
-                url: null
+                imageName: 'test',
+                url: null,
+                newUrl: ''
             } 
             this.handleChange = this.handleChange.bind(this);
             this.handleUpload = this.handleUpload.bind(this);
+            this.handleCrop = this.handleCrop.bind(this);
         }
         
         _crop(){
             // image in dataUrl
-            console.log(this.refs.cropper.getCroppedCanvas());
+            const image = this.refs.cropper.getCroppedCanvas().toDataURL();
+            this.setState({image})
+        }
+        
+        handleCrop(){
+            this.setState({newUrl: this.state.image}, () => {
+               this.handleUpload()
+            })
         }
         
         handleChange(e){
@@ -27,14 +37,16 @@ import 'cropperjs/dist/cropper.css';
                 image,
                 url
             }, () => {
-
+                console.log(this.state)
             })
            } 
         }
+        
         handleUpload(e){
-            const { image } = this.state;
-            const imageName = this.state.imageName;
-            const uploadTask = storage.ref(`images/${imageName}`).put(image);
+            let newUrl = this.state.newUrl
+            newUrl = newUrl.split(',')[1];
+            const { imageName } = this.state;
+            const uploadTask = storage.ref(`images/${imageName}`).putString(`${newUrl}`, 'base64');
             uploadTask.on('state_changed', 
             (snapshot) => {
                 //progress function 
@@ -44,8 +56,11 @@ import 'cropperjs/dist/cropper.css';
             }, 
             () => {
                 storage.ref('images').child(imageName).getDownloadURL().then(url => {
-                    this.setState({url})
+                    
+                    this.props.receiveUrl(url, this.state.imageName);
+                    
                 })
+                
             }
             );
         }
@@ -54,15 +69,22 @@ import 'cropperjs/dist/cropper.css';
             return (
                 <div>
                     <input type="file" onChange={this.handleChange}/>
+                    
+                    {
+                    
+                    this.state.newUrl ? 
+                    <img src={this.state.newUrl}/> : 
                     <Cropper
                         ref='cropper'
                         src={this.state.url ? this.state.url : ''}
-                        style={{width: 300, height: '100%'}}
                         aspectRatio={16/9}
                         guides={false}
                         crop={this._crop.bind(this)}
-                    />
-                    <button onClick={this.cropImage}>Cortar</button>
+                    /> 
+                        
+                    }
+                    
+                    <button onClick={this.handleCrop}>Cortar</button>
                 </div>
                 )
         }
