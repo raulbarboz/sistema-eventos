@@ -6,6 +6,7 @@ import AddEventPage from '../components/AddEventPage';
 import EditExpensePage from '../components/EditExpensePage';
 import OpenEventPage from '../components/OpenEventPage';
 import DashboardPage from '../components/DashboardPage';
+import CalendarContainer from '../components/calendar/CalendarContainer';
 import Header from '../components/Header';
 import NotFoundPage from '../components/NotFoundPage';
 import PrivateRoute from './PrivateRoute';
@@ -17,13 +18,14 @@ const AppRouter = () => (
   <Router history={history}>
       <div>
         <Switch>
-            <PublicRoute path="/" component={ Home }  exact={true}/>
-            <PrivateRoute path="/dashboard" component={ DashboardPage }/>
-            <PrivateRoute path="/create" component={ AddEventPage } />
-            <PrivateRoute path="/edit/:id" component={ EditExpensePage } />
-            <PrivateRoute path="/event/:id" component={ OpenEventPage } />
-            <Route component={ NotFoundPage } />
-          </Switch>
+          <PublicRoute path="/" component={ Home }  exact={true}/>
+          <PrivateRoute path="/dashboard" component={ DashboardPage } />
+          <PrivateRoute path="/calendar" component={ CalendarContainer } />
+          <PrivateRoute path="/create" component={ AddEventPage } />
+          <PrivateRoute path="/edit/:id" component={ EditExpensePage } />
+          <PrivateRoute path="/event/:id" component={ OpenEventPage } />
+          <Route component={ NotFoundPage } />
+        </Switch>
         </div>
   </Router>
 )

@@ -41,7 +41,7 @@ import 'cropperjs/dist/cropper.css';
                 image,
                 url
             }, () => {
-                console.log(this.state)
+               
             })
            } 
         }
