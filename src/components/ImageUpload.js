@@ -1,74 +1,102 @@
 import React, { Component } from 'react';
 import { storage } from '../firebase/firebase';
-import { FormGroup, Input, FormText, Progress } from 'reactstrap';
+import { Progress } from 'reactstrap';
 import uuid from 'uuid';
-
+import Cropper from 'react-cropper';
+import 'cropperjs/dist/cropper.css';
 
     class ImageUpload extends Component {
         constructor(props){
             super(props);
             this.state = { 
                 image: null,
-                imageName: null,
-                enableButton: null,
-                progress: 0
+                imageName: uuid(),
+                url: null,
+                newUrl: '',
+                progress: ''
             } 
+            this.handleChange = this.handleChange.bind(this);
+            this.handleUpload = this.handleUpload.bind(this);
+            this.handleCrop = this.handleCrop.bind(this);
         }
         
-        handleChange = (e) => {
-            
-            if(e.target.files[0]){
-                const image = e.target.files[0];
-                const imageName = uuid()+'.jpeg';
-                this.setState({image: image, imageName, enableButton: true}, () => {
-                    this.uploadImage();
-                })
-            }
-            
+        _crop(){
+            // image in dataUrl
+            const image = this.refs.cropper.getCroppedCanvas().toDataURL('image/jpeg');
+            this.setState({image})
         }
         
-        uploadImage = (e) => {
-            const { image } = this.state;
-            const imageName = this.state.imageName;
-            const uploadTask = storage.ref(`images/${imageName}`).put(image);
+        handleCrop(e){
+            e.preventDefault();
+            this.setState({newUrl: this.state.image}, () => {
+               this.handleUpload()
+            })
+        }
+        
+        handleChange(e){
+           if(e.target.files[0]){
+            const image = e.target.files[0];
+            const url = URL.createObjectURL(image);
+            this.setState({
+                image,
+                url
+            }, () => {
+                console.log(this.state)
+            })
+           } 
+        }
+        
+        handleUpload(e){
+            let newUrl = this.state.newUrl
+            newUrl = newUrl.split(',')[1];
+            const { imageName } = this.state;
+            const uploadTask = storage.ref(`images/${imageName}`).putString(`${newUrl}`, 'base64');
             uploadTask.on('state_changed', 
             (snapshot) => {
-                
+                //progress function 
                 let transferred = snapshot.bytesTransferred;
                 let total = snapshot.totalBytes;
                 let percentage = Math.floor((transferred * 100) / total);
 
                 //progress function 
                 this.setState({progress : percentage})
-                
             }, 
             (error) => {
                 console.log(error)
             }, 
             () => {
                 storage.ref('images').child(imageName).getDownloadURL().then(url => {
-                    //console.log(url)
+                    
                     this.props.receiveUrl(url, this.state.imageName);
+                    
                 })
+                
             }
             );
         }
-
-
+            
         render() {
             return (
                 <div>
-                    <FormGroup>
-                      {
+                    {
                       this.state.progress ? <Progress value={this.state.progress} /> : 
-                      <div>
-                      <Input type="file" onChange={this.handleChange}/>
-                      <FormText color="muted">
-                        Formato: JPEG / Tamanho MAX: 500kb / Área ideal: 500x500
-                      </FormText>
-                      </div>
-                      }
-                    </FormGroup>
+                    <div>
+                    <input type="file" onChange={this.handleChange}/>
+                    { this.state.image ? 
+                    <div>
+                    <Cropper
+                        ref='cropper'
+                        src={this.state.url ? this.state.url : ''}
+                        aspectRatio={16/9}
+                        style={{height: 400, width: '100%'}}
+                        guides={false}
+                        crop={this._crop.bind(this)}
+                    />                
+                    <button onClick={this.handleCrop}>Cortar</button> 
+                    </div> : ''
+                    }
+                    </div>
+                    }
                 </div>
                 )
         }

@@ -1,6 +1,6 @@
 import React from 'react';
 import moment from 'moment';
-import ImageUpload from './_ImageUpload';
+import ImageUpload from './ImageUpload';
 import { SingleDatePicker, DateRangePicker } from 'react-dates';
 import 'react-dates/lib/css/_datepicker.css';
 
