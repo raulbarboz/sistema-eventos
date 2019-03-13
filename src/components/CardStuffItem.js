@@ -1,5 +1,4 @@
 import React from 'react';
-import { Button } from 'reactstrap';
 
 const CardStuffItem = (props) => {
   const deleteStuff = () => {
@@ -10,7 +9,7 @@ const CardStuffItem = (props) => {
             <td>{props.stuff}</td>
             <td>{props.subtitle}</td>
             <td>{props.description}</td>
-            <td>{props.price}</td>
+            <td>{props.amount}</td>
             <td onClick={deleteStuff}>Remover</td>
           </tr>
   );

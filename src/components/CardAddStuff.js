@@ -5,17 +5,17 @@ class CardAddStuff extends React.Component {
   constructor(props){
     super(props)
     this.state= {
-      event: 'Título',
+      stuff: 'Título',
       subtitle: 'Subtítulo',
       amount: 0,
       description: 'Descrição'
     }
   }
   onInputChange = (e) => {
-    let event = (e.target.name === 'event') ? e.target.value : this.state.event;
+    let stuff = (e.target.name === 'stuff') ? e.target.value : this.state.stuff;
     let subtitle = (e.target.name === 'subtitle') ? e.target.value : this.state.subtitle;
     let description = (e.target.name === 'description') ? e.target.value : this.state.description;
-    this.setState({ event, subtitle, description })
+    this.setState({ stuff, subtitle, description })
   }
   onAmountChange = (e) => {
     const amount = e.target.value;
@@ -23,15 +23,18 @@ class CardAddStuff extends React.Component {
                 this.setState({ amount });
         }
   }
+  addStuff = () => {
+    this.props.addStuff(this.state)
+  }
   render(){
     return(
       <Form>
           <Input 
           type="text" 
-          name="event" 
+          name="stuff" 
           id="titulo" 
-          placeholder ={this.state.event} 
-          value = {this.state.event}
+          placeholder ={this.state.stuff} 
+          value = {this.state.stuff}
           onChange = {this.onInputChange}
           />
 
@@ -62,7 +65,7 @@ class CardAddStuff extends React.Component {
           onChange = {this.onInputChange}
           />
 
-        <Button onClick={() => { console.log(this.state)}}>+</Button>
+        <Button onClick={ this.addStuff }>+</Button>
       </Form>
     )
   }

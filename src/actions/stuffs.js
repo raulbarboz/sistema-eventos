@@ -13,11 +13,12 @@ export const startAddStuff = (id, stuffData = {}) => {
     const {
       stuff = '',
       subtitle = '',
+      amount = '',
       description = '',
       url = '',
       imageName = ''
     } = stuffData;
-    const stuffObj = { stuff, subtitle, description, url, imageName }
+    const stuffObj = { stuff, subtitle, amount,  description, url, imageName }
     database.ref(`users/${uid}/stuffs/${eventId}/`).push(stuffObj).then((ref) => {
       dispatch(addStuff({
         parent_id: eventId,

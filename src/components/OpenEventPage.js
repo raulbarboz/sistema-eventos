@@ -80,9 +80,8 @@ class OpenEventPage extends React.Component {
         </tbody>
       </Table>
        <CardAddStuff 
-        AddStuff={(props) => {
-          console.log(props)
-          this.props.dispatch(startAddStuff(this.props.event.id, this.state.stuff))
+        addStuff={(props) => {
+          this.props.dispatch(startAddStuff(this.props.event.id, props))
         }}
         />
       </div>
