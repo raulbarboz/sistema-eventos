@@ -22,29 +22,23 @@ class CardEditEventPage extends React.Component{
       endDate: props.event.endDate ? moment(props.event.endDate) : moment()
     }
   }
+
+  componentDidUpdate() {
+    if(this.state.endDate !== null && this.state.startDate !== null){
+      this.onSubmitChange()
+    }
+  }
   onEventChange = (e) =>{
     const event = e.target.value;
-    this.setState(() => ({ event }),
-    () => {
-      this.onSubmitChange();
-    });
+    this.setState({ event })
   }
   onSubtitleChange = (e) =>{
     const subtitle = e.target.value;
-    this.setState(() => ({ subtitle }),
-    () => {
-      this.onSubmitChange();
-    });
+    this.setState({ subtitle })
   }
   onDescriptionChange = (e) =>{
     const description = e.target.value;
-    this.setState(() => ({ description }),
-    () => {
-      this.onSubmitChange();
-    });
-  }
-  onDateChange = () => {
-    setTimeout(() => {this.onSubmitChange()},500)
+    this.setState({ description })
   }
   onFocusChange = ({ focused }) => {
     this.setState(() => ({calendarFocused: focused }))
@@ -119,7 +113,6 @@ class CardEditEventPage extends React.Component{
               focusedInput={this.state.focusedInput} // PropTypes.oneOf([START_DATE, END_DATE]) or null,
               onFocusChange={focusedInput => this.setState({ focusedInput })} // PropTypes.func.isRequired,
               minimumNights={0}
-              onClose={this.onDateChange}
             />
         </CardBody>
       </Card>
