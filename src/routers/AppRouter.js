@@ -3,7 +3,6 @@ import { Router, Route , Switch, Link, NavLink} from 'react-router-dom';
 import createHistory from 'history/createBrowserHistory';
 import Home from '../components/Home';
 import AddEventPage from '../components/AddEventPage';
-import EditExpensePage from '../components/EditExpensePage';
 import OpenEventPage from '../components/OpenEventPage';
 import DashboardPage from '../components/DashboardPage';
 import CalendarContainer from '../components/calendar/CalendarContainer';
@@ -22,7 +21,6 @@ const AppRouter = () => (
           <PrivateRoute path="/dashboard" component={ DashboardPage } />
           <PrivateRoute path="/calendar" component={ CalendarContainer } />
           <PrivateRoute path="/create" component={ AddEventPage } />
-          <PrivateRoute path="/edit/:id" component={ EditExpensePage } />
           <PrivateRoute path="/event/:id" component={ OpenEventPage } />
           <Route component={ NotFoundPage } />
         </Switch>

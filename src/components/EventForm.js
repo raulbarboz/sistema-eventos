@@ -1,7 +1,7 @@
 import React from 'react';
 import moment from 'moment';
 import ImageUpload from './ImageUpload';
-import { SingleDatePicker, DateRangePicker } from 'react-dates';
+import { DateRangePicker } from 'react-dates';
 import 'react-dates/lib/css/_datepicker.css';
 
 const now = moment();

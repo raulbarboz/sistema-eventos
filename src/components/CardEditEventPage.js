@@ -2,7 +2,7 @@ import React from 'react';
 import { Card, CardImg, CardText, CardBody, CardTitle, CardSubtitle, Popover, PopoverHeader, PopoverBody } from 'reactstrap';
 import { IoMdTrash } from "react-icons/io";
 import moment from 'moment';
-import { SingleDatePicker } from 'react-dates';
+import { DateRangePicker } from 'react-dates';
 import 'react-dates/lib/css/_datepicker.css';
 
 const now = moment();
@@ -17,7 +17,9 @@ class CardEditEventPage extends React.Component{
       description: this.props.event.description,
       createdAt: this.props.event.createdAt ? moment(this.props.event.createdAt) : moment(),
       calendarFocused: false,
-      popoverOpen: false
+      popoverOpen: false,
+      startDate: props.event.startDate ? moment(props.event.startDate) : moment(),
+      endDate: props.event.endDate ? moment(props.event.endDate) : moment()
     }
   }
   onEventChange = (e) =>{
@@ -41,19 +43,14 @@ class CardEditEventPage extends React.Component{
       this.onSubmitChange();
     });
   }
-  onDateChange = (createdAt) =>{
-    if(createdAt){
-      this.setState(() => ({ createdAt }),
-      () => {
-        this.onSubmitChange();
-      });
-    }
+  onDateChange = () => {
+    setTimeout(() => {this.onSubmitChange()},500)
   }
   onFocusChange = ({ focused }) => {
     this.setState(() => ({calendarFocused: focused }))
   }
   removeImage = () => {
-    
+    console.log(this.props.event.id)
   }
   togglePopover = () => {
     this.setState({
@@ -61,12 +58,14 @@ class CardEditEventPage extends React.Component{
     });
   }
   onSubmitChange = () => {
-    this.props.onSubmitChange({
-      event: this.state.event,
-      subtitle: this.state.subtitle,
-      description: this.state.description,
-      createdAt: this.state.createdAt.valueOf()
-    })
+      this.props.onSubmitChange({
+        event: this.state.event,
+        subtitle: this.state.subtitle,
+        description: this.state.description,
+        createdAt: this.state.createdAt.valueOf(),
+        startDate: this.state.startDate.valueOf(),
+        endDate: this.state.endDate.valueOf()
+      })
   }
   render(){
     return(
@@ -113,13 +112,14 @@ class CardEditEventPage extends React.Component{
             {this.state.description}
             </textarea>
           </CardText>
-            <SingleDatePicker
-            date={this.state.createdAt}
-            onDateChange={this.onDateChange}
-            focused={this.state.calendarFocused}
-            onFocusChange={this.onFocusChange}
-            numberOfMonths={1}
-            isOutsideRange={() => false}
+            <DateRangePicker
+              startDate={this.state.startDate} // momentPropTypes.momentObj or null,
+              endDate={this.state.endDate} // momentPropTypes.momentObj or null,
+              onDatesChange={({ startDate, endDate }) => this.setState({ startDate, endDate }) }// PropTypes.func.isRequired,
+              focusedInput={this.state.focusedInput} // PropTypes.oneOf([START_DATE, END_DATE]) or null,
+              onFocusChange={focusedInput => this.setState({ focusedInput })} // PropTypes.func.isRequired,
+              minimumNights={0}
+              onClose={this.onDateChange}
             />
         </CardBody>
       </Card>
