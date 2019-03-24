@@ -2,6 +2,7 @@ import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import eventsReducer from '../reducers/events';
 import stuffsReducer from '../reducers/stuffs';
+import eventsStuffsReducer from '../reducers/eventsStuffs';
 import filtersReducer from '../reducers/filters';
 import authReducer from '../reducers/auth';
 
@@ -13,6 +14,7 @@ export default () => {
     combineReducers({
       events: eventsReducer,
       stuffs: stuffsReducer,
+      eventsStuffs: eventsStuffsReducer,
       filters: filtersReducer,
       auth: authReducer
     }),

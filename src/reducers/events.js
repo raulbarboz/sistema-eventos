@@ -1,4 +1,4 @@
-// Expenses Reducers
+// Events Reducers
 
 const eventsReducerDefaultState = [];
 

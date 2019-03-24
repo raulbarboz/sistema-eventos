@@ -39,7 +39,6 @@ export default class EventForm extends React.Component {
         if (createdAt) {
             this.setState(() => ({createdAt}))
         }
-
     }
     onFocusChange = ({ focused }) => {
         this.setState(() => ({calendarFocused: focused }))

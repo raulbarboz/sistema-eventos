@@ -4,9 +4,9 @@ import { Provider } from 'react-redux';
 import AppRouter, { history } from './routers/AppRouter';
 import configureStore from './store/configureStore';
 import { startSetEvents } from './actions/events';
+import { startReadEventsStuffs } from './actions/eventsStuffs';
 import { startSetStuffs } from './actions/stuffs';
 import { login, logout } from './actions/auth';
-import getVisibleEvents from './selectors/events';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'normalize.css/normalize.css';
 import './styles/styles.scss';
@@ -42,7 +42,10 @@ firebase.auth().onAuthStateChanged((user) => {
 
   }else{
     store.dispatch(logout());
-    renderApp();
-    history.push('/')
+    store.dispatch(startReadEventsStuffs()).then(() => {
+      renderApp();
+    });
+    
+    //history.push('/')
   }
 })

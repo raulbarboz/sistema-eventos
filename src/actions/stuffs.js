@@ -1,4 +1,4 @@
-import database, {storage} from '../firebase/firebase.js';
+import database from '../firebase/firebase.js';
 
 // ADD_STUFF
 export const addStuff = (stuff) => ({

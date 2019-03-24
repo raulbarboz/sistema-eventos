@@ -4,13 +4,7 @@ import {
   Navbar,
   NavbarToggler,
   NavbarBrand,
-  Nav,
-  NavItem,
-  NavLink,
-  UncontrolledDropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem } from 'reactstrap';
+  Nav} from 'reactstrap';
 
 export default class NavBar extends React.Component {
   constructor(props) {
@@ -31,7 +25,7 @@ export default class NavBar extends React.Component {
       <div>
         <Navbar color="" light expand="md">
           <NavbarBrand className="navbar-brand__text red" href="/">Eventos</NavbarBrand>
-          <NavbarBrand className="navbar-brand__text blue" href="/">Buscar Evento</NavbarBrand>
+          <NavbarBrand className="navbar-brand__text blue" href="/search">Buscar Evento</NavbarBrand>
           <NavbarToggler onClick={this.toggle} />
           
           <Collapse isOpen={this.state.isOpen} navbar>

@@ -1,6 +1,6 @@
 import React from 'react';
 import LoginButton from './LoginButton';
-import NavBar from '../components/NavBar';
+import NavBar from './NavBar';
 
 export const Home = () => (
     <div>
