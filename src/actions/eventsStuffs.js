@@ -16,8 +16,8 @@ export const readEventsStuffs = (events_stuffs) => ({
               if(childSnapshot_level2.key === 'stuffs'){
                 childSnapshot_level3.forEach((childSnapshot_level4) => {
                   events_stuffs.push({
+                    parent_id: childSnapshot.key,
                     event_type: childSnapshot_level2.key,
-                    event_parent: childSnapshot.key,
                     event_id: childSnapshot_level3.key,
                     stuff_id: childSnapshot_level4.key,
                     ...childSnapshot_level4.val()
@@ -25,8 +25,8 @@ export const readEventsStuffs = (events_stuffs) => ({
                 })
               }else{
                 events_stuffs.push({
+                  parent_id: childSnapshot.key,
                   event_type: childSnapshot_level2.key,
-                  event_parent: childSnapshot.key,
                   event_id: childSnapshot_level3.key,
                   ...childSnapshot_level3.val()
                 })
