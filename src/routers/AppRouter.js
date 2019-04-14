@@ -7,6 +7,7 @@ import OpenEventPage from '../components/OpenEventPage';
 import DashboardPage from '../components/DashboardPage';
 import CalendarContainer from '../components/calendar/CalendarContainer';
 import Search from '../components/home/Search';
+import SearchEvent from '../components/home/SearchEvent';
 import NotFoundPage from '../components/NotFoundPage';
 import PrivateRoute from './PrivateRoute';
 import PublicRoute from './PublicRoute';
@@ -19,6 +20,7 @@ const AppRouter = () => (
         <Switch>
           <PublicRoute path="/" component={ Home } exact={ true } />
           <PublicRoute path="/search" component={ Search } exact={ true } />
+          <PublicRoute path="/search/:id" component={ SearchEvent } exact={ true }/>
           <PrivateRoute path="/dashboard" component={ DashboardPage } exact={ true } />
           <PrivateRoute path="/calendar" component={ CalendarContainer } exact={ true }/>
           <PrivateRoute path="/create" component={ AddEventPage } exact={ true }/>
