@@ -1,0 +1,110 @@
+diff --git a/src/app.js b/src/app.js
+index f64f5b8..d43aaa5 100644
+--- a/src/app.js
++++ b/src/app.js
+@@ -4,7 +4,6 @@ import { Provider } from 'react-redux';
+ import AppRouter, { history } from './routers/AppRouter';
+ import configureStore from './store/configureStore';
+ import { startSetEvents } from './actions/events';
+-import { startReadEventsStuffs } from './actions/eventsStuffs';
+ import { startSetStuffs } from './actions/stuffs';
+ import { login, logout } from './actions/auth';
+ import 'bootstrap/dist/css/bootstrap.min.css';
+@@ -29,6 +28,7 @@ const renderApp = () => {
+ 
+ ReactDOM.render(<p>Loading....</p>, document.getElementById('app'));
+ 
++// look this https://medium.com/firebase-developers/how-to-setup-firebase-authentication-with-react-in-5-minutes-maybe-10-bb8bb53e8834
+ firebase.auth().onAuthStateChanged((user) => {
+   if(user){
+     store.dispatch(login(user.uid));
+@@ -40,12 +40,10 @@ firebase.auth().onAuthStateChanged((user) => {
+       }
+     })
+ 
+-  }else{
++  } else{
+     store.dispatch(logout());
+-    store.dispatch(startReadEventsStuffs()).then(() => {
+-      renderApp();
+-    });
+-    
++    renderApp();
++
+     //history.push('/')
+   }
+ })
+diff --git a/src/components/home/Search.js b/src/components/home/Search.js
+index e88fda3..97c503e 100644
+--- a/src/components/home/Search.js
++++ b/src/components/home/Search.js
+@@ -1,6 +1,7 @@
+ import React from 'react';
+ import { connect } from 'react-redux';
+ import { Link } from 'react-router-dom';
++import { startReadEventsStuffs } from './actions/eventsStuffs';
+ 
+ class EventParent extends React.Component {
+     constructor(props){
+@@ -20,29 +21,36 @@ class EventParent extends React.Component {
+     }
+ }
+ 
+-class Search extends React.Component {
+-    constructor(props){
+-        super(props)
+-    }
+-    render(){
+-        return(
+-            <div>
+-            { this.props.eventsStuffs.map((event, key) => {
+-                if(event.event_type === "events"){
+-                    return <EventParent key={key} {...event} />
+-                }       
+-             })}
+-            </div>
+-            
+-        )
+-    }
++const Search = () => {
++    return (
++        <SearchContainer>
++            {({ eventsStuffs }) => (
++                <div>
++                { eventsStuffs.map((event, key) => {
++                    if(event.event_type === "events"){
++                        return <EventParent key={key} {...event} />
++                    }
++                    })}
++                </div>
++            )}
++        </SearchContainer>
++    );
++}
++
++const SearchContainer = ({ eventsStuffs, getEvents, children }) => {
++    return eventsStuffs && children({ eventsStuffs }) || getEvents() && 'Loading';
+ }
+ 
+-const mapStateToProps = (state, props) => {
+-    return{
+-     // events:selectEvents(state.events, state.filters)
+-      eventsStuffs:state.eventsStuffs
++const mapStateToProps = ({ eventsStuffs }) => {
++    return {
++        eventsStuffs: eventsStuffs
+     }
+-  }
+-  
+-  export default connect(mapStateToProps)(Search);
+\ No newline at end of file
++}
++const mapDispatchToProps = (({ dispatch }) => ({
++    getEvents: () => dispatch(startReadEventsStuffs()),
++}));
++
++export default connect(
++    mapStateToProps,
++    mapDispatchToProps,
++)(SearchContainer);
+\ No newline at end of file

@@ -29,7 +29,7 @@ class Search extends React.Component {
             <div>
             { this.props.eventsStuffs.map((event, key) => {
                 if(event.event_type === "events"){
-                    return <EventParent key={key} {...event} />
+                    return <EventParent key={event.event_id} {...event} />
                 }       
              })}
             </div>
